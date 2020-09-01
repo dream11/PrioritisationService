@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package example.simple;
+
+option java_package = "com.example.simple";
+
+message SimpleMessage {
+  int32 id = 1;
+  bool is_simple = 2;
+  string name = 3;
+  repeated int32 sample_list = 4;
+}
+
+message GreetRequest {
+  string message = 1;
+}
+
+message GreetResponse {
+  string message = 1;
+}
+
+service Greeting {
+  rpc Greet(GreetRequest) returns (GreetResponse) {};
+}

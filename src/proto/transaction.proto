@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.dream11.priorityPOC;
+
+option java_package = "com.dream11.protoc";
+option java_multiple_files = true;
+
+message Transaction {
+  string messageId = 1;
+  JobType jobType = 2;
+  int32 executionGuaranteed = 3;
+  Source source = 4;
+  int32 priorityLevel = 5;
+}
+
+enum JobType {
+  WINNER_DECLARATION = 0;
+  REFUND = 1;
+  CASHBONUS_DEPOSIT = 2;
+  WITHDRAWAL = 3;
+}
+
+enum Source {
+  CONTEST_JOIN = 0;
+  FPV = 1;
+  CRON = 2;
+}
+
+message PriorityResponse {
+  string messageId = 1;
+  string status = 2;
+}
+
+service TransactionPrioritisation {
+  rpc Prioritise(Transaction) returns (PriorityResponse) {};
+}
